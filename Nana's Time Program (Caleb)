@@ -1,0 +1,30 @@
+
+import datetime
+import csv
+print ("Nana, do you wish to begin work? Yes/No: ")
+DateAlert: str = input()
+if DateAlert == 'yes' :
+        Log_in = datetime.datetime.now()
+        print("Your starting time is:")
+        print (Log_in)
+        print("Are you done for the day? Yes/No: ")
+Answer: str = input()
+if Answer == 'yes':
+                Log_out = datetime.datetime.now()
+                print("You stopped work at: ")
+                print(Log_out)
+                diff_time = Log_out - Log_in
+                hour = diff_time.total_seconds() / 3600.0
+                print('You have worked for :', hour,'Hours')
+                SalaryPaid = hour * 5
+                print('You will be paid approximately:', "%.2f"%SalaryPaid, 'USD')
+                li = Log_in.strftime('%m/%d/%Y')
+                lo = Log_out.strftime('%m/%d/%Y')
+                sp = str(SalaryPaid)
+else: print("Thanks Nana")
+
+myData = [[Log_in, Log_out, hour, SalaryPaid]]
+myFile = open('NanaFile.csv', 'a')
+with myFile:
+    writer = csv.writer(myFile)
+    writer.writerows(myData)
